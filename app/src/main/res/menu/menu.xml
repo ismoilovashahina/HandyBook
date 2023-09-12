@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:title="Asosiy">
+        <menu>
+            <item android:id="@+id/boshsahifa"
+                android:title="Bosh sahifa"
+                android:icon="@drawable/book_open_solid"/>
+            <item android:id="@+id/qidiruv"
+                android:title="Qidiruv"
+                android:icon="@drawable/ic_baseline_search_24"/>
+            <item android:id="@+id/maqola"
+                android:title="Maqolalar"
+                android:icon="@drawable/feather_solid"/>
+            <item android:id="@+id/saqlangan"
+                android:title="Saqlanganlar"
+                android:icon="@drawable/saved"/>
+            <item android:id="@+id/til"
+                android:title="Tilni o'zgartirish"
+                android:icon="@drawable/ic_baseline_settings_24"/>
+        </menu>
+    </item>
+
+    <item android:title="Ijtimoiy">
+        <menu>
+            <item android:id="@+id/telegram"
+                android:title="Telegram"
+                android:icon="@drawable/telegram"/>
+            <item android:id="@+id/insta"
+                android:title="Instagram"
+                android:icon="@drawable/instagram"/>
+        </menu>
+    </item>
+
+    <item android:title="Ulashish">
+        <menu>
+            <item android:id="@+id/ulash"
+                android:title="Ulashish"
+                android:icon="@drawable/baseline_share_24"/>
+            <item android:id="@+id/baho"
+                android:title="Bizga baho bering"
+                android:icon="@drawable/baseline_star_24"/>
+        </menu>
+    </item>
+
+    <item android:title="Account">
+        <menu>
+            <item android:id="@+id/chiqhs"
+                android:title="Hisobdan chiqish"
+                android:icon="@drawable/ic_baseline_logout_24"/>
+        </menu>
+    </item>
+</menu>
