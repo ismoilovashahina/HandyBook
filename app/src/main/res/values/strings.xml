@@ -4,4 +4,12 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="close">Close</string>
     <string name="open">Open</string>
+    <string name="bosh_sahifa">Bosh sahifa</string>
+    <string name="kitob_yoki_muallifni_qidiring">Kitob yoki muallifni qidiring ...</string>
+    <string name="icon">icon</string>
+    <string name="o_tkir_hoshimovning_bahor_qaytmaydi_asari">O\'tkir Hoshimovning \'Bahor qaytmaydi\' asari</string>
+    <string name="hoziroq_o_qish">Hoziroq o\'qish</string>
+    <string name="bahor">bahor</string>
+    <string name="darsliklar">Darsliklar</string>
+    <string name="romanlar">Romanlar</string>
 </resources>

@@ -7,9 +7,13 @@
 
     <androidx.drawerlayout.widget.DrawerLayout
         android:id="@+id/drlayout"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:fitsSystemWindows="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         tools:openDrawer="start">
 
         <ScrollView
@@ -21,7 +25,7 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/asosiyoyna"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 tools:context="com.Asosiy_Oyna">
 
 
@@ -31,7 +35,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="1dp"
                     android:layout_marginTop="24dp"
-                    android:text="Bosh sahifa"
+                    android:text="@string/bosh_sahifa"
                     android:textColor="@color/app_dark"
                     android:textSize="20sp"
                     android:textStyle="bold"
@@ -44,6 +48,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="24dp"
                     android:background="@drawable/icon"
+                    android:contentDescription="@string/icon"
                     app:layout_constraintBottom_toBottomOf="@+id/boshsahifa"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="@+id/boshsahifa" />
@@ -55,7 +60,7 @@
                     android:layout_marginStart="24dp"
                     android:layout_marginTop="50dp"
                     android:layout_marginEnd="24dp"
-                    android:hint="Kitob yoki muallifni qidiring ..."
+                    android:hint="@string/kitob_yoki_muallifni_qidiring"
                     app:boxCornerRadiusBottomEnd="30dp"
                     app:boxCornerRadiusBottomStart="30dp"
                     app:boxCornerRadiusTopEnd="30dp"
@@ -67,7 +72,8 @@
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent" />
+                        android:layout_height="match_parent"
+                        tools:ignore="TouchTargetSizeCheck" />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <androidx.cardview.widget.CardView
@@ -94,7 +100,7 @@
                         android:layout_gravity="center|start"
                         android:layout_marginStart="24dp"
                         android:layout_marginBottom="10dp"
-                        android:text="O'tkir Hoshimovning 'Bahor qaytmaydi' asari"
+                        android:text="@string/o_tkir_hoshimovning_bahor_qaytmaydi_asari"
                         android:textColor="@color/app_light"
                         android:textSize="20sp" />
 
@@ -105,7 +111,7 @@
                         android:layout_marginStart="24dp"
                         android:layout_marginTop="75dp"
                         android:backgroundTint="@color/app_light"
-                        android:text="Hoziroq o'qish"
+                        android:text="@string/hoziroq_o_qish"
                         android:textColor="@color/app_dark" />
 
                     <ImageView
@@ -114,7 +120,8 @@
                         android:layout_gravity="bottom|end"
                         android:layout_marginEnd="-24dp"
                         android:layout_marginBottom="20dp"
-                        android:background="@drawable/bahor" />
+                        android:background="@drawable/bahor"
+                        android:contentDescription="@string/bahor" />
                 </androidx.cardview.widget.CardView>
 
 
@@ -124,7 +131,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="24dp"
                     android:layout_marginTop="24dp"
-                    android:text="Romanlar"
+                    android:text="@string/romanlar"
                     android:textColor="@color/app_dark"
                     android:textSize="20sp"
                     android:textStyle="bold"
@@ -148,7 +155,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="24dp"
                     android:layout_marginTop="16dp"
-                    android:text="Darsliklar"
+                    android:text="@string/darsliklar"
                     android:textColor="@color/app_dark"
                     android:textSize="20sp"
                     android:textStyle="bold"
@@ -166,7 +173,7 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/textView12"
-                    tools:listitem="@layout/book" />
+                    tools:listitem="@layout/darslik" />
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>
