@@ -12,6 +12,7 @@ import androidx.core.widget.addTextChangedListener
 import com.example.handybook.R
 import com.example.handybook.adapter.adapter
 import com.example.handybook.books.Badiiy
+import com.example.handybook.books.Categories
 import com.example.handybook.databinding.FragmentSearchBinding
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
@@ -20,6 +21,8 @@ import com.google.gson.reflect.TypeToken
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
+
+
 
 /**
  * A simple [Fragment] subclass.
@@ -30,6 +33,8 @@ class SearchFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
+
+    private lateinit var kitoblar:MutableList<Badiiy>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,13 +49,13 @@ class SearchFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val binding = FragmentSearchBinding.inflate(inflater,container,false)
-        val gson = Gson()
-        val type = object : TypeToken<List<Badiiy>>() {}.type
-        val activity = activity as AppCompatActivity
-        val cache = activity.getSharedPreferences("Cache", Context.MODE_PRIVATE)
-        var list2 = listOf<Badiiy>()
-        val str = cache.getString("books","")
-        list2 = gson.fromJson(str,type)
+//        val gson = Gson()
+//        val type = object : TypeToken<List<Badiiy>>() {}.type
+//        val activity = activity as AppCompatActivity
+//        val cache = activity.getSharedPreferences("Cache", Context.MODE_PRIVATE)
+        var list2 = loadKitoblar()
+//        val str = cache.getString("books","")
+//        list2 = gson.fromJson(str,type)
 
         Log.d("TAG", "onCreateView: ${list2}")
         var adapter = adapter(list2,object : adapter.OnClick{
@@ -83,6 +88,22 @@ class SearchFragment : Fragment() {
 
 
         return binding.root
+    }
+
+    private fun loadKitoblar() : MutableList<Badiiy>{
+
+        kitoblar = mutableListOf()
+        kitoblar.add((Badiiy("Urush tugasa",R.drawable.book2,"8.5", Categories.ROMANLAR)))
+        kitoblar.add(Badiiy("Ikki eshik orasi",R.drawable.book3,"7.4", Categories.ROMANLAR))
+        kitoblar.add(Badiiy("Tasviriy sana't 1-sinf",R.drawable.tasviriy_sanat,"6.0", Categories.DARSLIKLAR))
+        kitoblar.add(Badiiy("Ming bir kecha ertaklar",R.drawable.ming_bir_kecha_ertaklar,"6.2", Categories.ERTAKLAR))
+        kitoblar.add(Badiiy("O'tkan kunlar", R.drawable.book4,"8.6", Categories.ROMANLAR))
+        kitoblar.add(Badiiy("Yulduzli tunlar",R.drawable.book1,"8.2", Categories.ROMANLAR))
+        kitoblar.add(Badiiy("Anor",R.drawable.anor,"8.4", Categories.HIKOYALAR))
+        kitoblar.add(Badiiy("Iymon",R.drawable.iymon,"9.85", Categories.DINIY_KITOBLAR))
+        kitoblar.add(Badiiy("O'tmishdan ertaklar",R.drawable.otmishdan_ertaklar,"7.7", Categories.QISSALAR))
+
+        return kitoblar
     }
 
     companion object {

@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import com.example.handybook.R
 import com.example.handybook.books.Badiiy
+import com.example.handybook.books.Categories
 import com.example.handybook.databinding.FragmentKirishBinding
 import com.example.handybook.user.User
 import com.google.gson.Gson
@@ -52,16 +53,21 @@ class KirishFragment : Fragment() {
         }
 
 
-        val list = mutableListOf<Badiiy>()
-        val gson = Gson()
-        object : TypeToken<List<User>>() {}.type
-        val activity = activity as AppCompatActivity
-        val cache = activity.getSharedPreferences("Cache", Context.MODE_PRIVATE)
-        list.add(Badiiy("Urush tugasa",R.drawable.book2,"8.5"))
-        list.add(Badiiy("Ikki eshik orasi",R.drawable.book3,"7.4"))
-        list.add(Badiiy("O'tkan kunlar", R.drawable.book4,"8.6"))
-        list.add(Badiiy("Yulduzli tunlar",R.drawable.book1,"8.2"))
-        cache.edit().putString("books",gson.toJson(list)).apply()
+//        val list = mutableListOf<Badiiy>()
+//        val gson = Gson()
+//        object : TypeToken<List<User>>() {}.type
+//        val activity = activity as AppCompatActivity
+//        val cache = activity.getSharedPreferences("Cache", Context.MODE_PRIVATE)
+//        list.add(Badiiy("Urush tugasa",R.drawable.book2,"8.5", Categories.ROMANLAR))
+//        list.add(Badiiy("Ikki eshik orasi",R.drawable.book3,"7.4", Categories.ROMANLAR))
+//        list.add(Badiiy("O'tkan kunlar", R.drawable.book4,"8.6", Categories.ROMANLAR))
+//        list.add(Badiiy("Yulduzli tunlar",R.drawable.book1,"8.2", Categories.ROMANLAR))
+//        list.add(Badiiy("Iymon",R.drawable.iymon,"9.85", Categories.DINIY_KITOBLAR))
+//        list.add(Badiiy("O'tmishdan ertaklar",R.drawable.otmishdan_ertaklar,"7.7", Categories.QISSALAR))
+//        list.add(Badiiy("Anor",R.drawable.anor,"8.4", Categories.HIKOYALAR))
+//        list.add(Badiiy("Ming bir kecha ertaklar",R.drawable.ming_bir_kecha_ertaklar,"6.2", Categories.ERTAKLAR))
+//        list.add(Badiiy("Tasviriy sana't 1-sinf",R.drawable.tasviriy_sanat,"6.0", Categories.DARSLIKLAR))
+//        cache.edit().putString("books",gson.toJson(list)).apply()
 
         return binding.root
     }

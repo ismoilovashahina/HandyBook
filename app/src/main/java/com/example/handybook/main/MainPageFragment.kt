@@ -8,13 +8,18 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.widget.addTextChangedListener
 import androidx.drawerlayout.widget.DrawerLayout
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.handybook.R
+import com.example.handybook.adapter.CategoryAdapter
 import com.example.handybook.adapter.adapter
 import com.example.handybook.adapter.adapter_darslik
 import com.example.handybook.books.Badiiy
+import com.example.handybook.books.Categories
 import com.example.handybook.books.Darslik
 import com.example.handybook.databinding.FragmentMainPageBinding
+import com.example.handybook.intro.SignUpFragment
 import com.google.android.material.navigation.NavigationView
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
@@ -34,6 +39,9 @@ class MainPageFragment : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
 
+    private lateinit var badiiyKitoblar_adapter: adapter
+    private lateinit var kitoblar: MutableList<Badiiy>
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -48,22 +56,51 @@ class MainPageFragment : Fragment() {
     ): View? {
         val binding = FragmentMainPageBinding.inflate(inflater,container,false)
         val list2 = mutableListOf<Darslik>()
-        val gson = Gson()
-        val type = object : TypeToken<List<Badiiy>>() {}.type
-        val activity = activity as AppCompatActivity
-        val cache = activity.getSharedPreferences("Cache", Context.MODE_PRIVATE)
+//        val gson = Gson()
+//        val type = object : TypeToken<List<Badiiy>>() {}.type
+//        val activity = activity as AppCompatActivity
+//        val cache = activity.getSharedPreferences("Cache", Context.MODE_PRIVATE)
         lateinit var toggle: ActionBarDrawerToggle
-        var list = listOf<Badiiy>()
+        var list = loadKitoblar()
 
         list2.add(Darslik(R.drawable.darslik1))
         list2.add(Darslik(R.drawable.darslik2))
         list2.add(Darslik(R.drawable.darslik3))
         list2.add(Darslik(R.drawable.darslik4))
 
-        val str = cache.getString("books","")
-        list = gson.fromJson(str,type)
 
-        val adapter = adapter(list, object : adapter.OnClick{
+//        binding.search.setOnClickListener {
+//            parentFragmentManager.beginTransaction().replace(R.id.asosiyoyna, SearchFragment()).commit()
+//
+//        }
+
+
+        binding.search.addTextChangedListener {
+            var itemFilter = mutableListOf<Badiiy>()
+            if (it!!.length > 0 && it.isNotBlank()){
+                for (i in list){
+                    if (i.name.contains(it)){
+                        itemFilter.add(i)
+                    }
+                }
+                badiiyKitoblar_adapter = adapter(itemFilter,object : adapter.OnClick{
+                    override fun click(book: Badiiy) {
+                        parentFragmentManager.beginTransaction().replace(R.id.main_window,InformationFragment.newInstance(book,"")).addToBackStack("back").commit()
+                    }})
+
+            }else badiiyKitoblar_adapter = adapter(list,object : adapter.OnClick{
+                override fun click(book: Badiiy) {
+                    parentFragmentManager.beginTransaction().replace(R.id.main_window,InformationFragment.newInstance(book,"")).addToBackStack("back").commit()
+                }})
+
+            binding.recycleview.adapter = badiiyKitoblar_adapter
+        }
+
+
+//        val str = cache.getString("books","")
+//        list = gson.fromJson(str,type)
+
+         badiiyKitoblar_adapter = adapter(list, object : adapter.OnClick{
             override fun click(book: Badiiy) {
                 parentFragmentManager.beginTransaction().replace(R.id.main_window,InformationFragment.newInstance(book,"")).addToBackStack("orqaga").commit()
             }
@@ -71,8 +108,39 @@ class MainPageFragment : Fragment() {
         })
         val adapter2 = adapter_darslik(list2)
 
-        binding.recycleview.adapter = adapter
+        binding.recycleview.adapter = badiiyKitoblar_adapter
         binding.recycleview2.adapter = adapter2
+
+
+
+
+
+        binding.categoryRV.adapter = CategoryAdapter(Categories.values(), object : CategoryAdapter.MyCategoryInterface{
+            override fun onItemClick(category: Categories, position: Int) {
+                var categoryList = mutableListOf<Badiiy>()
+                if (category.categoryName=="Barchasi"){
+                    categoryList.addAll(list)
+                }
+                list.forEach{
+                    if (it.category==category) categoryList.add(it)
+                }
+                badiiyKitoblar_adapter = adapter(categoryList, object : adapter.OnClick{
+
+                    override fun click(book: Badiiy) {
+                        parentFragmentManager.beginTransaction().replace(R.id.main_window,InformationFragment.newInstance(book,"")).addToBackStack("orqaga").commit()
+                    }
+
+                })
+                binding.recycleview.adapter = badiiyKitoblar_adapter
+            }
+        })
+
+        binding.categoryRV.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+
+
+
+
+
 
         val drawerlayout: DrawerLayout = binding.drlayout
         val navView: NavigationView = binding.navView
@@ -102,6 +170,22 @@ class MainPageFragment : Fragment() {
         }
 
         return binding.root
+    }
+
+    private fun loadKitoblar() : MutableList<Badiiy>{
+
+    kitoblar = mutableListOf()
+        kitoblar.add((Badiiy("Urush tugasa",R.drawable.book2,"8.5", Categories.ROMANLAR)))
+        kitoblar.add(Badiiy("Ikki eshik orasi",R.drawable.book3,"7.4", Categories.ROMANLAR))
+        kitoblar.add(Badiiy("Tasviriy sana't 1-sinf",R.drawable.tasviriy_sanat,"6.0", Categories.DARSLIKLAR))
+        kitoblar.add(Badiiy("Ming bir kecha ertaklar",R.drawable.ming_bir_kecha_ertaklar,"6.2", Categories.ERTAKLAR))
+        kitoblar.add(Badiiy("O'tkan kunlar", R.drawable.book4,"8.6", Categories.ROMANLAR))
+        kitoblar.add(Badiiy("Yulduzli tunlar",R.drawable.book1,"8.2", Categories.ROMANLAR))
+        kitoblar.add(Badiiy("Anor",R.drawable.anor,"8.4", Categories.HIKOYALAR))
+        kitoblar.add(Badiiy("Iymon",R.drawable.iymon,"9.85", Categories.DINIY_KITOBLAR))
+        kitoblar.add(Badiiy("O'tmishdan ertaklar",R.drawable.otmishdan_ertaklar,"7.7", Categories.QISSALAR))
+
+        return kitoblar
     }
 
     companion object {

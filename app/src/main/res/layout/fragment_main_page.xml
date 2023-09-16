@@ -25,8 +25,7 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/asosiyoyna"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                tools:context="com.Asosiy_Oyna">
+                android:layout_height="wrap_content">
 
 
                 <TextView
@@ -53,8 +52,19 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="@+id/boshsahifa" />
 
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/categoryRV"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:orientation="horizontal"
+                    tools:itemCount="1"
+                    tools:listitem="@layout/item_category"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/boshsahifa" />
+
                 <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/search"
+                   android:id="@+id/textInputLayout3"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="24dp"
@@ -66,14 +76,15 @@
                     app:boxCornerRadiusTopEnd="30dp"
                     app:boxCornerRadiusTopStart="30dp"
                     app:layout_constraintEnd_toEndOf="parent"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
 
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/boshsahifa">
+                    app:layout_constraintTop_toBottomOf="@+id/categoryRV">
 
                     <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/search"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        tools:ignore="TouchTargetSizeCheck" />
+                        android:layout_height="match_parent" />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <androidx.cardview.widget.CardView
@@ -85,7 +96,7 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="1.0"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/search">
+                    app:layout_constraintTop_toBottomOf="@+id/textInputLayout3">
 
                     <View
                         android:layout_width="match_parent"
